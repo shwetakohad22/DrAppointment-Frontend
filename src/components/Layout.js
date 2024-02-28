@@ -3,6 +3,7 @@ import "../layout.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice";
+import { Badge } from "antd";
 
 const Layout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -40,17 +41,34 @@ const Layout = ({ children }) => {
     },
     {
       name: "Users",
-      path: "/users",
+      path: "/admin/userslist",
       icon: "ri-user-line",
     },
     {
       name: "Doctors",
-      path: "/doctors",
+      path: "/admin/doctorslist",
       icon: "ri-user-star-line",
     },
     {
       name: "Profile",
       path: "/profile",
+      icon: "ri-user-line",
+    },
+  ];
+  const doctorMenu = [
+    {
+      name: "Home",
+      path: "/",
+      icon: "ri-home-line",
+    },
+    {
+      name: "Appointments",
+      path: "/doctor/appointments",
+      icon: "ri-file-list-line",
+    },
+    {
+      name: "Profile",
+      path: `/doctor/profile/${user?._id}`,
       icon: "ri-user-line",
     },
   ];
@@ -61,13 +79,19 @@ const Layout = ({ children }) => {
     navigate("/login");
   };
 
-  const menuToBeRendered = user?.isAdmin ? adminMenu : userMenu;
+  const menuToBeRendered = user?.isAdmin
+    ? adminMenu
+    : user?.isDoctor
+    ? doctorMenu
+    : userMenu;
+  const role = user?.isAdmin ? "Admin" : user?.isDoctor ? "Doctor" : "User";
   return (
     <div className="main">
       <div className="d-flex layout">
         <div className="sidebar">
           <div className="sidebar-header">
             <h1 className="logo">SH</h1>
+            <h1 className="role">{role}</h1>
           </div>
           <div className="menu">
             {menuToBeRendered.map((menu) => {
@@ -103,8 +127,13 @@ const Layout = ({ children }) => {
               ></i>
             )}
             <div className="d-flex align-items-center px-4">
-              <i className="ri-notification-2-line header-action-icon px-3"></i>
-              <Link className="anchor" to="/profile">
+              <Badge
+                count={user?.unseenNotifications.length}
+                onClick={() => navigate("/notifications")}
+              >
+                <i className="ri-notification-2-line header-action-icon px-3"></i>
+              </Badge>
+              <Link className="anchor mx-2" to="/profile">
                 {user?.name}
               </Link>
             </div>

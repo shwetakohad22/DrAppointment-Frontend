@@ -9,7 +9,7 @@
 .role {
   color: white;
   font-size: 14px;
-  margin-top: -20px;
+  margin-top: -10px;
 }
 .sidebar {
   background-color: #005555;
@@ -81,6 +81,10 @@
   padding-left: 10px;
 }
 
+.ant-scroll-number-only-unit {
+  padding-right: -10px !important;
+  padding-bottom: -10px !important;
+}
 @media screen and (max-width: 768px) {
   .menu {
     padding: 0 5px;

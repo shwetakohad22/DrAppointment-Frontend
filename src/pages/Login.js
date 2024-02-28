@@ -40,12 +40,11 @@ function Login() {
           </Form.Item>
 
           <Button
-            className="primary-button my-2 full-width-button"
+            className="primary-button my-2 full-width-button "
             htmlType="submit"
           >
             LOGIN
           </Button>
-
           <Link to="/register" className="anchor mt-2">
             CLICK HERE TO REGISTER
           </Link>

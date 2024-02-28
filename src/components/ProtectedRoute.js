@@ -7,7 +7,6 @@ import { hideLoading, showLoading } from "../redux/alertsSlice";
 
 function ProtectedRoute(props) {
   const { user } = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,7 +31,7 @@ function ProtectedRoute(props) {
       }
     } catch (error) {
       dispatch(hideLoading());
-      localStorage.clear()
+      localStorage.clear();
       navigate("/login");
     }
   };
