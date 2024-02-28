@@ -3,8 +3,8 @@ import axios from "axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import Layout from "../../components/Layout";
-import { hideLoading, showLoading } from "../../redux/alertsSlice";
+import Layout from "../components/Layout";
+import { hideLoading, showLoading } from "../redux/alertsSlice";
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);

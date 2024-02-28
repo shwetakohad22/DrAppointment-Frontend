@@ -21,6 +21,7 @@ function DoctorAppointment() {
           },
         }
       );
+      console.log(resposne.data.data)
       dispatch(hideLoading());
       if (resposne.data.success) {
         setAppointments(resposne.data.data);
